@@ -69,7 +69,7 @@ function populateAdvertisementFromGap(
 	target.advDataLocalName = uint8ArrayToUTF8(localNameBuffer!);
 	target.advDataTxPowerLevel = gap.txPowerLevel ? gap.txPowerLevel[0] : 0;
 	target.advDataIsConnectable = isGapAdvertisementFlagRaised(gapFlags, GapAdvertisementFlagType.LE_GENERAL_DISC_MODE);
-	target.advDataServiceUUIDs = uint8ArrayTo16BitServiceUuids(gap.serviceDataUuid16Bit!);
+	target.advDataServiceUUIDs = uint8ArrayTo16BitServiceUuids(gap.completeListOfServiceUuids16Bit!);
 	target.advDataManufacturerData = gap.manufacturerSpecificData;
 }
 

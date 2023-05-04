@@ -6,6 +6,10 @@ export function isNumber(value: unknown): boolean {
     return typeof value === 'number' && !Number.isNaN(value);
 }
 
+export function isString(value: unknown): boolean {
+    return typeof value === 'string';
+}
+
 export function isInteger(value: unknown): boolean {
     return isNumber(value) && (value as number) % 1 === 0;
 }

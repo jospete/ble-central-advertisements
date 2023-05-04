@@ -26,11 +26,15 @@ describe('ble-central-advertisements', () => {
 
 			const decoder = new AdvertisementDecoder();
 
-			const advertisementHex = '020106030309181409546865726d6f6d65746572204578616d706c65';
-			const advertising = Convert.hexToUint8Array(advertisementHex).buffer;
+			const advertisementDataHex = '020106030309181409546865726d6f6d65746572204578616d706c65';
+			const advertising = Convert.hexToUint8Array(advertisementDataHex).buffer;
 			const output = decoder.decode({id: '00:11:22:33:44:55', name: 'Thermometer', rssi: -50, advertising});
 
 			expect(output.gap).toBeDefined();
+			expect(output.gapFlags).toBe(0x06);
+			expect(output.advDataLocalName).toBe('Thermometer Example');
+			expect(output.gap?.completeListOfServiceUuids16Bit).toEqual(Uint8Array.from([0x09, 0x18]));
+			expect(output.advDataServiceUUIDs).toEqual(['1809']);
 		});
 	});
 });
