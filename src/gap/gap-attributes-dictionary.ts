@@ -4,7 +4,7 @@ import {isInteger} from '../common/utility';
  * Result returned by parseGapAttributesDictionary()
  */
 export interface GapAttributesDictionary {
-	[key: number]: ArrayBuffer;
+	[key: number]: Uint8Array;
 }
 
 /**
@@ -16,11 +16,11 @@ export interface GapAttributesDictionary {
  * https://www.bluetooth.com/specifications/assigned-numbers/generic-access-profile
  * https://stackoverflow.com/questions/24003777/read-advertisement-packet-in-android
  */
-export function parseGapAttributesDictionary(buffer: ArrayBuffer): GapAttributesDictionary {
+export function parseGapAttributesDictionary(buffer: Uint8Array): GapAttributesDictionary {
 
 	const result: GapAttributesDictionary = {};
 
-	if (!(buffer instanceof ArrayBuffer)) {
+	if (!(buffer instanceof Uint8Array)) {
 		return result;
 	}
 

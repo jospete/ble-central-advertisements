@@ -40,7 +40,7 @@ export function getIOSAdvertisingDataKeys(): iOSAdvertisingDataKey[] {
 /**
  * Utility for testing the validity of a given value as an iOS advertisement dictionary.
  */
-export const isIOSAdvertisingData = (value: any): boolean => {
+export function isIOSAdvertisingData(value: any): boolean {
 
 	if (!isObject(value)) {
 		return false;

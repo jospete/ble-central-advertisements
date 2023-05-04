@@ -1,8 +1,12 @@
 import {GapAttributeCode} from './gap-attribute-code';
 import {GapAttributesDictionary, parseGapAttributesDictionary} from './gap-attributes-dictionary';
 
-export type GapAttributeValue = ArrayBuffer;
+export type GapAttributeValue = Uint8Array;
 
+/**
+ * Core set of TLV options for advertising data
+ * per the bluetooth spec.
+ */
 export interface GapAttributesMetadata {
 	flags?: GapAttributeValue;
 	incompleteListOfServiceUuids16Bit?: GapAttributeValue;
@@ -50,10 +54,17 @@ export interface GapAttributesMetadata {
 	manufacturerSpecificData?: GapAttributeValue;
 }
 
-export function parseGapAttributesMetadata(buffer: ArrayBuffer): GapAttributesMetadata {
+/**
+ * Parses the given raw advertising data as a metadata object with all TLV fields
+ * processed / converted into named fields.
+ */
+export function parseGapAttributesMetadata(buffer: Uint8Array): GapAttributesMetadata {
 	return parseGapAttributesMetadataFromDictionary(parseGapAttributesDictionary(buffer));
 };
 
+/**
+ * Transforms a raw dictionary of parsed gap attributes into a strongly typed object.
+ */
 export function parseGapAttributesMetadataFromDictionary(table: GapAttributesDictionary): GapAttributesMetadata {
 	return {
 		flags: table[GapAttributeCode.FLAGS],

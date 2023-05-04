@@ -37,8 +37,12 @@
   "keywords": [
     "ble",
     "central",
+	"advertise",
+	"advertising",
     "advertisement",
     "bluetooth",
+	"low",
+	"energy",
     "cordova-plugin-ble-central"
   ],
   "author": "Josh Noel <obsidize@gmail.com>",
