@@ -1,4 +1,5 @@
-import { isObject, parse16BitServiceUuids, parseAsciiString } from '../common/utility';
+import { isObject } from '../common/utility';
+import { uint8ArrayToUTF8, uint8ArrayTo16BitServiceUuids } from '../common/convert';
 import { GapAdvertisementFlagType, isGapAdvertisementFlagRaised } from '../gap/gap-advertisement-flag-type';
 import { GapAttributesMetadata, parseGapAttributesMetadata } from '../gap/gap-attributes-metadata';
 import { iOSAdvertisingData, iOSAdvertisingServiceDataDictionary, isIOSAdvertisingData } from '../plugin/ios-advertising-data';
@@ -29,6 +30,47 @@ export interface Advertisement extends PluginAdvertisement {
 export interface AdvertisementDecoderOptions {
 	useShortenedLocalName?: boolean;
 	[key: string]: any;
+}
+
+function cloneIOSAdvertisingData(
+	target: Partial<Advertisement>,
+	adv: iOSAdvertisingData
+): void {
+
+	if (!isObject(target) || !isObject(adv))
+		return;
+
+	target.advDataChannel = adv.kCBAdvDataChannel;
+	target.advDataLocalName = adv.kCBAdvDataLocalName;
+	target.advDataTxPowerLevel = adv.kCBAdvDataTxPowerLevel;
+	target.advDataIsConnectable = adv.kCBAdvDataIsConnectable;
+	target.advDataServiceUUIDs = adv.kCBAdvDataServiceUUIDs;
+	target.advDataManufacturerData = adv.kCBAdvDataManufacturerData;
+	target.advDataServiceData = adv.kCBAdvDataServiceData;
+}
+
+function populateAdvertisementFromGap(
+	target: Partial<Advertisement>, 
+	gap: GapAttributesMetadata,
+	options: AdvertisementDecoderOptions
+): void {
+
+	if (!isObject(target) || !isObject(gap))
+		return;
+
+	const gapFlags = gap.flags ? gap.flags[0] : 0;
+	const localNameBuffer = options.useShortenedLocalName
+		? gap.localNameShortened
+		: gap.localNameComplete;
+
+	target.gap = gap;
+	target.gapFlags = gapFlags;
+	target.advDataChannel = gap.channelMapUpdateIndication ? gap.channelMapUpdateIndication[0] : 0;
+	target.advDataLocalName = uint8ArrayToUTF8(localNameBuffer!);
+	target.advDataTxPowerLevel = gap.txPowerLevel ? gap.txPowerLevel[0] : 0;
+	target.advDataIsConnectable = isGapAdvertisementFlagRaised(gapFlags, GapAdvertisementFlagType.LE_GENERAL_DISC_MODE);
+	target.advDataServiceUUIDs = uint8ArrayTo16BitServiceUuids(gap.serviceDataUuid16Bit!);
+	target.advDataManufacturerData = gap.manufacturerSpecificData;
 }
 
 /**
@@ -64,32 +106,13 @@ export class AdvertisementDecoder {
 			const {advertising} = source;
 
 			if (isIOSAdvertisingData(advertising)) {
-
 				const adv = advertising as iOSAdvertisingData;
+				cloneIOSAdvertisingData(result, adv);
 
-				result.advDataChannel = adv.kCBAdvDataChannel;
-				result.advDataLocalName = adv.kCBAdvDataLocalName;
-				result.advDataTxPowerLevel = adv.kCBAdvDataTxPowerLevel;
-				result.advDataIsConnectable = adv.kCBAdvDataIsConnectable;
-				result.advDataServiceUUIDs = adv.kCBAdvDataServiceUUIDs;
-				result.advDataManufacturerData = adv.kCBAdvDataManufacturerData;
-				result.advDataServiceData = adv.kCBAdvDataServiceData;
-				
 			} else if (advertising instanceof ArrayBuffer) {
-				
 				const adv = advertising as ArrayBuffer;
 				const gap = parseGapAttributesMetadata(new Uint8Array(adv));
-				const gapFlags = gap.flags ? gap.flags[0] : 0;
-				const localNameBuffer = this.options.useShortenedLocalName
-					? gap.localNameShortened
-					: gap.localNameComplete;
-
-				result.gap = gap;
-				result.gapFlags = gapFlags;
-				result.advDataLocalName = parseAsciiString(localNameBuffer!);
-				result.advDataTxPowerLevel = gap.txPowerLevel ? gap.txPowerLevel[0] : 0;
-				result.advDataIsConnectable = isGapAdvertisementFlagRaised(gapFlags, GapAdvertisementFlagType.LE_GENERAL_DISC_MODE);
-				result.advDataServiceUUIDs = parse16BitServiceUuids(gap.serviceDataUuid16Bit!);
+				populateAdvertisementFromGap(result, gap, this.options);
 			}
 		}
 
