@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"declaration": true,
+		"stripInternal": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"importHelpers": true,
+		"module": "ES2022",
+		"moduleResolution": "node",
+		"outDir": "./dist",
+		"rootDir": "src",
+		"target": "ES6",
+		"lib": [
+			"ES6",
+			"ES2017",
+			"DOM"
+		]
+	},
+	"include": [
+		"src"
+	],
+	"exclude": [
+		"node_modules",
+		"tests",
+		"dist"
+	]
+}

@@ -1,4 +1,5 @@
 {
+	"typescript.preferences.importModuleSpecifier": "relative",
     "editor.insertSpaces": false,
     "prettier.useTabs": true,
     "javascript.preferences.quoteStyle": "single",
