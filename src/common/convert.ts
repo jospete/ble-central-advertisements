@@ -1,14 +1,16 @@
-import { isInteger, isString } from './utility';
+import { isInteger, isString, isUint8Array } from './utility';
 
 export function byteToHex(byte: number): string {
+
 	if (!isInteger(byte))
 		return '00';
+
 	return (byte & 0xFF).toString(16).padStart(2, '0');
 }
 
 export function uint8ArrayToUTF8(data: Uint8Array): string {
 
-	if (!(data instanceof Uint8Array))
+	if (!isUint8Array(data))
 		return '';
 
 	return new TextDecoder().decode(data.buffer);
@@ -38,14 +40,14 @@ export function hexToUint8Array(hex: string): Uint8Array {
 	const bytes: number[] = [];
 
 	for (let i = 0; i < hexChunks.length; i++)
-		bytes[i] = parseInt(hexChunks[i].padStart(2, '0'), 16);
+		bytes[i] = parseInt(hexChunks[i], 16);
 
 	return Uint8Array.from(bytes);
 }
 
 export function uint8ArrayToHex(data: Uint8Array): string {
 
-	if (!(data instanceof Uint8Array))
+	if (!isUint8Array(data))
 		return '';
 
 	let chars: string[] = [];
@@ -60,7 +62,7 @@ export function uint8ArrayTo16BitServiceUuids(data: Uint8Array): string[] {
 
 	const result: string[] = [];
 
-	if (data instanceof Uint8Array) {
+	if (isUint8Array(data)) {
 
 		for (let i = 0; i < data.byteLength; i += 2) {	
 			const segment = data.slice(i, i + 2).reverse();

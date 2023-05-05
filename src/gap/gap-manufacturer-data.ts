@@ -1,3 +1,5 @@
+import { isUint8Array } from '../common/utility';
+
 export interface GapManufacturerData {
 	manufacturerId: number;
 	manufacturerData: Uint8Array;
@@ -13,7 +15,7 @@ export function parseAdvertisementManufacturerMetadata(
 	let manufacturerId: number = 0;
 	let manufacturerData: Uint8Array = input;
 
-	if ((input instanceof Uint8Array) && input.byteLength >= 2) {
+	if (isUint8Array(input) && input.byteLength >= 2) {
 		manufacturerId = new DataView(input.buffer).getUint16(0, true);
 		manufacturerData = input.slice(2);
 	}

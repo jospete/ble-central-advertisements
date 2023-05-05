@@ -13,3 +13,7 @@ export function isString(value: unknown): boolean {
 export function isInteger(value: unknown): boolean {
     return isNumber(value) && (value as number) % 1 === 0;
 }
+
+export function isUint8Array(value: unknown): boolean {
+	return isObject(value) && (value instanceof Uint8Array);
+}

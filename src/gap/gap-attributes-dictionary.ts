@@ -44,7 +44,7 @@ export function parseGapAttributesDictionary(buffer: Uint8Array): GapAttributesD
 		dataStart = i + 2; // Skip length and tag bytes to get data start index
 		dataEnd = dataStart + len - 1; // "length" byte includes type, so back up by 1
 
-		// Capture payload for given type with the key as the hex string of the type, i.e. '0xff'
+		// Capture payload for given type with the key as the raw byte literal of the type, i.e. 0xff
 		result[type] = buffer.slice(dataStart, dataEnd);
 
 		// Advance to start of next chunk

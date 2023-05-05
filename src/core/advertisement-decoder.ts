@@ -1,4 +1,4 @@
-import { isObject } from '../common/utility';
+import { isInteger, isObject, isUint8Array } from '../common/utility';
 import { uint8ArrayToUTF8, uint8ArrayTo16BitServiceUuids } from '../common/convert';
 import { GapAdvertisementFlagType, isGapAdvertisementFlagRaised } from '../gap/gap-advertisement-flag-type';
 import { GapAttributesMetadata, parseGapAttributesMetadata } from '../gap/gap-attributes-metadata';
@@ -58,17 +58,25 @@ function populateAdvertisementFromGap(
 	if (!isObject(target) || !isObject(gap))
 		return;
 
-	const gapFlags = gap.flags ? gap.flags[0] : 0;
+	const gapFlags = gap.flags ? gap.flags[0] : undefined;
 	const localNameBuffer = options.useShortenedLocalName
 		? gap.localNameShortened
 		: gap.localNameComplete;
 
 	target.gap = gap;
 	target.gapFlags = gapFlags;
-	target.advDataChannel = gap.channelMapUpdateIndication ? gap.channelMapUpdateIndication[0] : 0;
+
+	if (isUint8Array(gap.channelMapUpdateIndication))
+		target.advDataChannel = gap.channelMapUpdateIndication![0];
+
 	target.advDataLocalName = uint8ArrayToUTF8(localNameBuffer!);
-	target.advDataTxPowerLevel = gap.txPowerLevel ? gap.txPowerLevel[0] : 0;
-	target.advDataIsConnectable = isGapAdvertisementFlagRaised(gapFlags, GapAdvertisementFlagType.LE_GENERAL_DISC_MODE);
+
+	if (isUint8Array(gap.txPowerLevel))
+		target.advDataTxPowerLevel = gap.txPowerLevel![0];
+
+	if (isInteger(gapFlags))
+		target.advDataIsConnectable = isGapAdvertisementFlagRaised(gapFlags!, GapAdvertisementFlagType.LE_GENERAL_DISC_MODE);
+
 	target.advDataServiceUUIDs = uint8ArrayTo16BitServiceUuids(gap.completeListOfServiceUuids16Bit!);
 	target.advDataManufacturerData = gap.manufacturerSpecificData;
 }
@@ -94,7 +102,7 @@ export class AdvertisementDecoder {
 	 */
 	public decode(
 		source: PluginAdvertisement,
-		output: Partial<Advertisement> | null = null
+		output?: Partial<Advertisement>
 	): Advertisement {
 
 		const result = isObject(output)
