@@ -1,4 +1,4 @@
-import { isInteger, isObject, isUint8Array } from '../common/utility';
+import { isArrayBuffer, isInteger, isObject, isUint8Array } from '../common/utility';
 import { uint8ArrayToUTF8, uint8ArrayTo16BitServiceUuids } from '../common/convert';
 import { GapAdvertisementFlagType, isGapAdvertisementFlagRaised } from '../gap/gap-advertisement-flag-type';
 import { GapAttributesMetadata, parseGapAttributesMetadata } from '../gap/gap-attributes-metadata';
@@ -101,27 +101,36 @@ export class AdvertisementDecoder {
 	 * advertisement packet.
 	 */
 	public decode(
-		source: PluginAdvertisement | Partial<PluginAdvertisement>,
+		source: PluginAdvertisement | Partial<PluginAdvertisement> | ArrayBuffer,
 		output?: Partial<Advertisement>
 	): Advertisement {
 
-		const result = isObject(output)
+		let result = isObject(output)
 			? output as Advertisement
 			: source as Advertisement;
 
+		// nothing to process, abort
 		if (!isObject(source))
 			return result;
 
-		const { advertising } = source;
+		const isBufferSource = isArrayBuffer(source);
 
-		if (isIOSAdvertisingData(advertising)) {
-			const adv = advertising as iOSAdvertisingData;
-			cloneIOSAdvertisingData(result, adv);
+		// don't allow shimming properties onto buffer sources
+		if (result === source && isBufferSource)
+			result = {} as Advertisement;
 
-		} else if (advertising instanceof ArrayBuffer) {
+		const advertising = isBufferSource
+			? source
+			: (source as Advertisement).advertising;
+
+		if (isArrayBuffer(advertising)) {
 			const adv = advertising as ArrayBuffer;
 			const gap = parseGapAttributesMetadata(new Uint8Array(adv));
 			populateAdvertisementFromGap(result, gap, this.options);
+
+		} else if (isIOSAdvertisingData(advertising)) {
+			const adv = advertising as iOSAdvertisingData;
+			cloneIOSAdvertisingData(result, adv);
 		}
 
 		return result;

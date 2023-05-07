@@ -18,6 +18,10 @@ export function isInteger(value: unknown): boolean {
 	return isNumber(value) && (value as number) % 1 === 0;
 }
 
+export function isArrayBuffer(value: unknown): boolean {
+	return isObject(value) && (value instanceof ArrayBuffer);
+}
+
 export function isUint8Array(value: unknown): boolean {
 	return isObject(value) && (value instanceof Uint8Array);
 }
