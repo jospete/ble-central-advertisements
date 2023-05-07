@@ -41,7 +41,7 @@ function failure(error) {
 ble.scan(services, seconds, success, failure);
 ```
 
-**NOTE:** While this module was primarily build to deal with advertising data from the ble-central plugin,
+**NOTE:** While this module was primarily built to deal with advertising data from the ble-central plugin,
 it is designed to be general purpose, and can parse raw BLE advertising data provided from any module / plugin
 (not just from the ble-central plugin).
 
