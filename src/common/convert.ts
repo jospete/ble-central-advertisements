@@ -31,7 +31,7 @@ export function splitHex(hex: string): string[] {
 	if (safeHex.length % 2 !== 0)
 		safeHex = '0' + safeHex;
 
-	return Array.from(safeHex.match(/.{2}/g) || []);
+	return Array.from(safeHex.match(/.{2}/g)!);
 }
 
 export function hexToUint8Array(hex: string): Uint8Array {
@@ -64,7 +64,7 @@ export function uint8ArrayTo16BitServiceUuids(data: Uint8Array): string[] {
 
 	if (isUint8Array(data)) {
 
-		for (let i = 0; i < data.byteLength; i += 2) {	
+		for (let i = 0; i < data.byteLength; i += 2) {
 			const segment = data.slice(i, i + 2).reverse();
 			result.push(uint8ArrayToHex(segment));
 		}

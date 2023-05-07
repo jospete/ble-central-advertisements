@@ -28,9 +28,6 @@ export function isUint8Array(value: unknown): boolean {
 
 export function removeUndefinedEntries<T>(value: T): T {
 
-	if (!isObject(value))
-		return value;
-
 	for (const key in value)
 		if (isUndefined(value[key]))
 			delete value[key];
