@@ -17,7 +17,7 @@ npm install -P -E ble-central-advertisements
 ## Usage
 
 ```typescript
-import { AdvertisementDecoder } from 'ble-central-advertising';
+import { AdvertisementDecoder } from 'ble-central-advertisements';
 
 const decoder = new AdvertisementDecoder();
 const services = [];
@@ -39,6 +39,21 @@ function failure(error) {
 
 // https://github.com/don/cordova-plugin-ble-central#scan
 ble.scan(services, seconds, success, failure);
+```
+
+**NOTE:** While this module was primarily build to deal with advertising data from the ble-central plugin,
+it is designed to be general purpose, and can parse raw BLE advertising data provided from any module / plugin
+(not just from the ble-central plugin).
+
+```typescript
+import { AdvertisementDecoder, Convert } from 'ble-central-advertisements';
+
+const decoder = new AdvertisementDecoder();
+const advertisementDataHex = '020106030309181409546865726d6f6d65746572204578616d706c65';
+const input = Convert.hexToUint8Array(advertisementDataHex).buffer;
+const output = decoder.decode(input);
+
+console.log(output.advDataLocalName); // 'Thermometer Example'
 ```
 
 ## Documentation

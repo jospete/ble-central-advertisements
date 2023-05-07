@@ -1,4 +1,4 @@
-import {AdvertisementDecoder, Convert } from '../src';
+import { AdvertisementDecoder, Convert } from '../src';
 
 describe('ble-central-advertisements', () => {
 
@@ -28,7 +28,7 @@ describe('ble-central-advertisements', () => {
 
 			const advertisementDataHex = '020106030309181409546865726d6f6d65746572204578616d706c65';
 			const advertising = Convert.hexToUint8Array(advertisementDataHex).buffer;
-			const output = decoder.decode({id: '00:11:22:33:44:55', name: 'Thermometer', rssi: -50, advertising});
+			const output = decoder.decode({ id: '00:11:22:33:44:55', name: 'Thermometer', rssi: -50, advertising });
 
 			expect(output.gap).toBeDefined();
 			expect(output.gapFlags).toBe(0x06);
@@ -36,5 +36,16 @@ describe('ble-central-advertisements', () => {
 			expect(output.gap?.completeListOfServiceUuids16Bit).toEqual(Uint8Array.from([0x09, 0x18]));
 			expect(output.advDataServiceUUIDs).toEqual(['1809']);
 		});
+
+		it('can run the readme example', () => {
+
+			const decoder = new AdvertisementDecoder();
+			const advertisementDataHex = '020106030309181409546865726d6f6d65746572204578616d706c65';
+			const input = Convert.hexToUint8Array(advertisementDataHex).buffer;
+			const output = decoder.decode(input);
+
+			expect(output.advDataLocalName).toBe('Thermometer Example');
+			expect(output).not.toBe(input as any);
+		})
 	});
 });
