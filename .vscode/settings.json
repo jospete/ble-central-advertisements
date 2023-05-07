@@ -1,9 +1,8 @@
 {
 	"typescript.preferences.importModuleSpecifier": "relative",
-    "editor.insertSpaces": false,
-    "prettier.useTabs": true,
-    "javascript.preferences.quoteStyle": "single",
-    "typescript.preferences.quoteStyle": "single",
-    "editor.formatOnSave": true,
-    "editor.detectIndentation": false
+	"editor.insertSpaces": false,
+	"javascript.preferences.quoteStyle": "single",
+	"typescript.preferences.quoteStyle": "single",
+	"editor.formatOnSave": true,
+	"editor.detectIndentation": false
 }

@@ -1,5 +1,6 @@
-import {GapAttributeCode} from './gap-attribute-code';
-import {GapAttributesDictionary, parseGapAttributesDictionary} from './gap-attributes-dictionary';
+import { isUndefined } from '../common/utility';
+import { GapAttributeCode } from './gap-attribute-code';
+import { GapAttributesDictionary, parseGapAttributesDictionary } from './gap-attributes-dictionary';
 
 export type GapAttributeValue = Uint8Array;
 
@@ -52,6 +53,7 @@ export interface GapAttributesMetadata {
 	broadcastCode?: GapAttributeValue;
 	informationData3D?: GapAttributeValue;
 	manufacturerSpecificData?: GapAttributeValue;
+	[key: string]: GapAttributeValue | undefined;
 }
 
 /**
@@ -59,7 +61,17 @@ export interface GapAttributesMetadata {
  * processed / converted into named fields.
  */
 export function parseGapAttributesMetadata(buffer: Uint8Array): GapAttributesMetadata {
-	return parseGapAttributesMetadataFromDictionary(parseGapAttributesDictionary(buffer));
+
+	const result = parseGapAttributesMetadataFromDictionary(parseGapAttributesDictionary(buffer));
+
+	// purge undefined keys from the output
+	for (const key in result) {
+		if (isUndefined(result[key])) {
+			delete result[key];
+		}
+	}
+
+	return result;
 };
 
 /**

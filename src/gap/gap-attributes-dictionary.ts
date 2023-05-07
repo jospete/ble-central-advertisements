@@ -1,4 +1,4 @@
-import {isInteger} from '../common/utility';
+import { isInteger, isUint8Array } from '../common/utility';
 
 /**
  * Result returned by parseGapAttributesDictionary()
@@ -20,7 +20,7 @@ export function parseGapAttributesDictionary(buffer: Uint8Array): GapAttributesD
 
 	const result: GapAttributesDictionary = {};
 
-	if (!(buffer instanceof Uint8Array)) {
+	if (!isUint8Array(buffer)) {
 		return result;
 	}
 
