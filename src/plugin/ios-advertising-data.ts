@@ -1,4 +1,4 @@
-import {isObject} from '../common/utility';
+import { isObject } from '../common/utility';
 
 /**
  * Partial interface for iOS 'advertising' property.
@@ -25,7 +25,7 @@ export type iOSAdvertisingDataKey = keyof iOSAdvertisingData;
 /**
  * Get the list of enumerated properties for an iOS advertising data object.
  */
-export function getIOSAdvertisingDataKeys(): iOSAdvertisingDataKey[] {
+function getIOSAdvertisingDataKeys(): iOSAdvertisingDataKey[] {
 	return [
 		'kCBAdvDataChannel',
 		'kCBAdvDataLocalName',
