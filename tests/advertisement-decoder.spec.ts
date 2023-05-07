@@ -6,6 +6,24 @@ describe('AdvertisementDecoder', () => {
 		expect(new AdvertisementDecoder()).toBeTruthy();
 	});
 
+	it('does nothing when given invalid input', () => {
+		const decoder = new AdvertisementDecoder();
+		expect(decoder.decode(null as any)).toEqual(null as any);
+	});
+
+	it('accepts an ArrayBuffer directly as a decode input option', () => {
+
+		const decoder = new AdvertisementDecoder();
+		const input = Uint8Array.of(0, 1, 2, 3, 4, 5).buffer;
+		const expectedOutput: Partial<Advertisement> = {
+			gap: {},
+			advDataLocalName: '',
+			advDataServiceUUIDs: []
+		};
+
+		expect(decoder.decode(input)).toEqual(expectedOutput as any);
+	});
+
 	it('normalizes iOS advertising data', () => {
 
 		const decoder = new AdvertisementDecoder();
