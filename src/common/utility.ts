@@ -21,3 +21,15 @@ export function isInteger(value: unknown): boolean {
 export function isUint8Array(value: unknown): boolean {
 	return isObject(value) && (value instanceof Uint8Array);
 }
+
+export function removeUndefinedEntries<T>(value: T): T {
+
+	if (!isObject(value))
+		return value;
+
+	for (const key in value)
+		if (isUndefined(value[key]))
+			delete value[key];
+
+	return value;
+} 

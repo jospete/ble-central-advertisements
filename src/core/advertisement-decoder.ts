@@ -50,7 +50,7 @@ function cloneIOSAdvertisingData(
 }
 
 function populateAdvertisementFromGap(
-	target: Partial<Advertisement>, 
+	target: Partial<Advertisement>,
 	gap: GapAttributesMetadata,
 	options: AdvertisementDecoderOptions
 ): void {
@@ -101,27 +101,27 @@ export class AdvertisementDecoder {
 	 * advertisement packet.
 	 */
 	public decode(
-		source: PluginAdvertisement,
+		source: PluginAdvertisement | Partial<PluginAdvertisement>,
 		output?: Partial<Advertisement>
 	): Advertisement {
 
 		const result = isObject(output)
-		? output as Advertisement
-		: source as Advertisement;
+			? output as Advertisement
+			: source as Advertisement;
 
-		if (isObject(source)) {
+		if (!isObject(source))
+			return result;
 
-			const {advertising} = source;
+		const { advertising } = source;
 
-			if (isIOSAdvertisingData(advertising)) {
-				const adv = advertising as iOSAdvertisingData;
-				cloneIOSAdvertisingData(result, adv);
+		if (isIOSAdvertisingData(advertising)) {
+			const adv = advertising as iOSAdvertisingData;
+			cloneIOSAdvertisingData(result, adv);
 
-			} else if (advertising instanceof ArrayBuffer) {
-				const adv = advertising as ArrayBuffer;
-				const gap = parseGapAttributesMetadata(new Uint8Array(adv));
-				populateAdvertisementFromGap(result, gap, this.options);
-			}
+		} else if (advertising instanceof ArrayBuffer) {
+			const adv = advertising as ArrayBuffer;
+			const gap = parseGapAttributesMetadata(new Uint8Array(adv));
+			populateAdvertisementFromGap(result, gap, this.options);
 		}
 
 		return result;

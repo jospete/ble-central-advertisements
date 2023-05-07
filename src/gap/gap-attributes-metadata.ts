@@ -1,4 +1,4 @@
-import { isUndefined } from '../common/utility';
+import { removeUndefinedEntries } from '../common/utility';
 import { GapAttributeCode } from './gap-attribute-code';
 import { GapAttributesDictionary, parseGapAttributesDictionary } from './gap-attributes-dictionary';
 
@@ -61,17 +61,9 @@ export interface GapAttributesMetadata {
  * processed / converted into named fields.
  */
 export function parseGapAttributesMetadata(buffer: Uint8Array): GapAttributesMetadata {
-
-	const result = parseGapAttributesMetadataFromDictionary(parseGapAttributesDictionary(buffer));
-
-	// purge undefined keys from the output
-	for (const key in result) {
-		if (isUndefined(result[key])) {
-			delete result[key];
-		}
-	}
-
-	return result;
+	const dictionary = parseGapAttributesDictionary(buffer);
+	const metadata = parseGapAttributesMetadataFromDictionary(dictionary);
+	return removeUndefinedEntries(metadata);
 };
 
 /**
