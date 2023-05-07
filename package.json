@@ -1,6 +1,6 @@
 {
   "name": "ble-central-advertisements",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Advertisement parsing utility for cordova-plugin-ble-central",
   "main": "es5.js",
   "module": "index.js",
