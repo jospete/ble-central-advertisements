@@ -93,30 +93,34 @@ export class AdvertisementDecoder {
 	 * Decode an advertisement payload received from the ble central plugin.
 	 * If an output value is provided, all parsed content will be placed on
 	 * it - otherwise, parsed content will be shimmed into the provided
-	 * advertisement packet.
+	 * input value, and that value will be returned.
+	 * 
+	 * NOTE: if the input is an ArrayBuffer, this will generate a new
+	 * object as the output rather than hammering properties onto
+	 * the ArrayBuffer instance.
 	 */
 	public decode(
-		source: PluginAdvertisement | Partial<PluginAdvertisement> | ArrayBuffer,
+		input: PluginAdvertisement | Partial<PluginAdvertisement> | ArrayBuffer,
 		output?: Partial<Advertisement>
 	): Advertisement {
 
 		let result = isObject(output)
 			? output as Advertisement
-			: source as Advertisement;
+			: input as Advertisement;
 
 		// nothing to process, abort
-		if (!isObject(source))
+		if (!isObject(input))
 			return result;
 
-		const isBufferSource = isArrayBuffer(source);
+		const isBufferSource = isArrayBuffer(input);
 
 		// don't allow shimming properties onto buffer sources
-		if (result === source && isBufferSource)
+		if (result === input && isBufferSource)
 			result = {} as Advertisement;
 
 		const advertising = isBufferSource
-			? source
-			: (source as Advertisement).advertising;
+			? input
+			: (input as Advertisement).advertising;
 
 		if (isArrayBuffer(advertising)) {
 			const adv = advertising as ArrayBuffer;
