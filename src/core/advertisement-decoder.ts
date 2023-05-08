@@ -101,7 +101,7 @@ export class AdvertisementDecoder {
 	public decode(
 		input: PluginAdvertisement | Partial<PluginAdvertisement> | ArrayBuffer,
 		output?: Partial<Advertisement>
-	): Advertisement {
+	): Advertisement | Partial<Advertisement> {
 
 		let result = isObject(output)
 			? output as Advertisement

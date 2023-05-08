@@ -1,4 +1,5 @@
-import { GapManufacturerData, parseAdvertisementManufacturerMetadata, parseGapAttributesDictionary } from '../src';
+import { GapAttributeCode, GapManufacturerData, parseAdvertisementManufacturerMetadata, parseGapAttributesDictionary } from '../src';
+import { AdvertisementBufferBuilder } from './utility/advertisement-buffer-builder';
 
 describe('GAP Utilities', () => {
 
@@ -6,6 +7,23 @@ describe('GAP Utilities', () => {
 
 		it('returns an empty object when the provided input is not a Uint8Array', () => {
 			expect(parseGapAttributesDictionary(null as any)).toEqual({});
+		});
+
+		it('returns a map of parsed TLV sequences', () => {
+
+			const completeNameText = 'Complete Name';
+			const completeNameBuffer = new TextEncoder().encode(completeNameText);
+			const updateIndicactionBuffer = Uint8Array.of(1);
+
+			const buffer = new AdvertisementBufferBuilder()
+				.add(GapAttributeCode.CHANNEL_MAP_UPDATE_INDICATION, updateIndicactionBuffer)
+				.add(GapAttributeCode.LOCAL_NAME_COMPLETE, completeNameBuffer)
+				.toUint8Array();
+
+			const dictionary = parseGapAttributesDictionary(buffer);
+			
+			expect(dictionary[GapAttributeCode.CHANNEL_MAP_UPDATE_INDICATION]).toEqual(updateIndicactionBuffer);
+			expect(dictionary[GapAttributeCode.LOCAL_NAME_COMPLETE]).toEqual(completeNameBuffer);
 		});
 	});
 

@@ -1,4 +1,5 @@
-import { Advertisement, AdvertisementDecoder } from '../src';
+import { Advertisement, AdvertisementDecoder, GapAttributeCode, PluginAdvertisement } from '../src';
+import { AdvertisementBufferBuilder } from './utility/advertisement-buffer-builder';
 
 describe('AdvertisementDecoder', () => {
 
@@ -57,5 +58,59 @@ describe('AdvertisementDecoder', () => {
 		};
 
 		expect(decoded).toEqual(expectedOutput);
+	});
+
+	it('properly handles complex configurations', () => {
+		
+		const decoder = new AdvertisementDecoder();
+
+		const partialAdvertisingData: PluginAdvertisement = {
+			id: '00:11:22:33:44:55',
+			name: 'Test Device',
+			rssi: -45,
+			advertising: null as any
+		};
+
+		const decoded = decoder.decode(partialAdvertisingData, {});
+
+		expect(decoded).toEqual({} as any);
+	});
+
+	it('has an option to resolve either local shorted name or local complete name when both exist', () => {
+
+		const decoder = new AdvertisementDecoder({useShortenedLocalName: true});
+		const textEncoder = new TextEncoder();
+		const shortNameText = 'Short Name';
+		const completeNameText = 'Complete Name';
+
+		const advertising = new AdvertisementBufferBuilder()
+			.add(GapAttributeCode.LOCAL_NAME_SHORTENED, textEncoder.encode(shortNameText))
+			.add(GapAttributeCode.LOCAL_NAME_COMPLETE, textEncoder.encode(completeNameText))
+			.toUint8Array()
+			.buffer;
+
+		const decoded = decoder.decode(advertising);
+		expect(decoded.advDataLocalName).toBe(shortNameText);
+	});
+
+	it('includes channel, tx power level, and manufacturer data when provided', () => {
+
+		const decoder = new AdvertisementDecoder();
+		const channel = 15;
+		const txPowerLevel = 45;
+		const manufacturerDataBuffer = Uint8Array.of(1, 2, 3, 4, 5);
+
+		const advertising = new AdvertisementBufferBuilder()
+			.add(GapAttributeCode.CHANNEL_MAP_UPDATE_INDICATION, Uint8Array.of(channel))
+			.add(GapAttributeCode.TX_POWER_LEVEL, Uint8Array.of(txPowerLevel))
+			.add(GapAttributeCode.MANUFACTURER_SPECIFIC_DATA, manufacturerDataBuffer)
+			.toUint8Array()
+			.buffer;
+
+		const decoded = decoder.decode(advertising);
+
+		expect(decoded.advDataChannel).toBe(channel);
+		expect(decoded.advDataTxPowerLevel).toBe(txPowerLevel);
+		expect(decoded.advDataManufacturerData).toEqual(manufacturerDataBuffer);
 	});
 });
