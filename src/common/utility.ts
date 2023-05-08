@@ -15,7 +15,7 @@ export function isUndefined(value: unknown): boolean {
 }
 
 export function isInteger(value: unknown): boolean {
-	return isNumber(value) && (value as number) % 1 === 0;
+	return isNumber(value) && ((value as number) % 1 === 0);
 }
 
 export function isArrayBuffer(value: unknown): boolean {

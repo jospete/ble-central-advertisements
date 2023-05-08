@@ -1,4 +1,4 @@
-import { isArrayBuffer, isInteger, isObject, isUint8Array } from '../common/utility';
+import { isArrayBuffer, isObject, isUint8Array } from '../common/utility';
 import { uint8ArrayToUTF8, uint8ArrayTo16BitServiceUuids } from '../common/convert';
 import { GapAdvertisementFlagType, isGapAdvertisementFlagRaised } from '../gap/gap-advertisement-flag-type';
 import { GapAttributesMetadata, parseGapAttributesMetadata } from '../gap/gap-attributes-metadata';
@@ -52,7 +52,6 @@ function populateAdvertisementFromGap(
 	options: AdvertisementDecoderOptions
 ): void {
 
-	const gapFlags = gap.flags ? gap.flags[0] : undefined;
 	const localNameBuffer = options.useShortenedLocalName
 		? gap.localNameShortened
 		: gap.localNameComplete;
@@ -61,9 +60,9 @@ function populateAdvertisementFromGap(
 	target.advDataLocalName = uint8ArrayToUTF8(localNameBuffer!);
 	target.advDataServiceUUIDs = uint8ArrayTo16BitServiceUuids(gap.completeListOfServiceUuids16Bit!);
 
-	if (isInteger(gapFlags)) {
-		target.gapFlags = gapFlags;
-		target.advDataIsConnectable = isGapAdvertisementFlagRaised(gapFlags!, GapAdvertisementFlagType.LE_GENERAL_DISC_MODE);
+	if (isUint8Array(gap.flags)) {
+		const flags = target.gapFlags = gap.flags![0];
+		target.advDataIsConnectable = isGapAdvertisementFlagRaised(flags, GapAdvertisementFlagType.LE_GENERAL_DISC_MODE);
 	}
 
 	if (isUint8Array(gap.channelMapUpdateIndication))
@@ -123,13 +122,12 @@ export class AdvertisementDecoder {
 			: (input as Advertisement).advertising;
 
 		if (isArrayBuffer(advertising)) {
-			const adv = advertising as ArrayBuffer;
-			const gap = parseGapAttributesMetadata(new Uint8Array(adv));
+			const buffer = new Uint8Array(advertising as ArrayBuffer);
+			const gap = parseGapAttributesMetadata(buffer);
 			populateAdvertisementFromGap(result, gap, this.options);
 
 		} else if (isIOSAdvertisingData(advertising)) {
-			const adv = advertising as iOSAdvertisingData;
-			cloneIOSAdvertisingData(result, adv);
+			cloneIOSAdvertisingData(result, advertising as iOSAdvertisingData);
 		}
 
 		return result;
