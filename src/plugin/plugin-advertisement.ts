@@ -1,4 +1,4 @@
-import {iOSAdvertisingData} from './ios-advertising-data';
+import { iOSAdvertisingData } from './ios-advertising-data';
 
 /**
  * Core type of data to expect on the 'advertising' property.

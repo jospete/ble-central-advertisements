@@ -35,7 +35,7 @@ export function parseGapAttributesDictionary(buffer: Uint8Array): GapAttributesD
 		// length byte comes first in packet structure
 		len = buffer[i];
 
-		// terminate when length byte is zero or undefined
+		// terminate when length byte is zero or not an integer value
 		if (!isInteger(len) || len <= 0) {
 			break;
 		}
@@ -52,4 +52,4 @@ export function parseGapAttributesDictionary(buffer: Uint8Array): GapAttributesD
 	}
 
 	return result;
-};
+}

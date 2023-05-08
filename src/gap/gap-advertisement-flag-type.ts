@@ -21,4 +21,4 @@ export enum GapAdvertisementFlagType {
 
 export function isGapAdvertisementFlagRaised(flags: number, type: GapAdvertisementFlagType): boolean {
 	return ((flags & type) >>> 0) === type;
-};
+}

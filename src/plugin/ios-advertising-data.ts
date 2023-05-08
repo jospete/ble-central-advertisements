@@ -53,4 +53,4 @@ export function isIOSAdvertisingData(value: any): boolean {
 	}
 
 	return false;
-};
+}

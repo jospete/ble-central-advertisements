@@ -64,7 +64,7 @@ export function parseGapAttributesMetadata(buffer: Uint8Array): GapAttributesMet
 	const dictionary = parseGapAttributesDictionary(buffer);
 	const metadata = parseGapAttributesMetadataFromDictionary(dictionary);
 	return removeUndefinedEntries(metadata);
-};
+}
 
 /**
  * Transforms a raw dictionary of parsed gap attributes into a strongly typed object.
@@ -116,4 +116,4 @@ export function parseGapAttributesMetadataFromDictionary(table: GapAttributesDic
 		informationData3D: table[GapAttributeCode.INFORMATION_DATA_3D],
 		manufacturerSpecificData: table[GapAttributeCode.MANUFACTURER_SPECIFIC_DATA],
 	};
-};
+}

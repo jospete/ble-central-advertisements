@@ -21,4 +21,4 @@ export function parseAdvertisementManufacturerMetadata(
 	}
 
 	return {manufacturerId, manufacturerData};
-};
+}
