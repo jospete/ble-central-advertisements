@@ -1,4 +1,6 @@
-import { isInteger, isUint8Array } from '../common/utility';
+import { Utility } from '../common/utility';
+
+const { isInteger, isUint8Array } = Utility;
 
 /**
  * Result returned by parseGapAttributesDictionary()

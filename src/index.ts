@@ -1,4 +1,4 @@
-export * as Convert from './common/convert';
+export {Convert} from './common/convert';
 export {Advertisement, AdvertisementDecoderOptions, AdvertisingServiceDataDictionary, AdvertisementDecoder} from './core/advertisement-decoder';
 export {GapAdvertisementFlagType, isGapAdvertisementFlagRaised} from './gap/gap-advertisement-flag-type';
 export {GapAttributeCode} from './gap/gap-attribute-code';

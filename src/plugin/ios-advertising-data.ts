@@ -1,4 +1,6 @@
-import { isObject } from '../common/utility';
+import { Utility } from '../common/utility';
+
+const { isObject } = Utility;
 
 /**
  * Partial interface for iOS 'advertising' property.

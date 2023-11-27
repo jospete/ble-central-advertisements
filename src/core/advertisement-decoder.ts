@@ -1,9 +1,11 @@
-import { isArrayBuffer, isObject, isUint8Array } from '../common/utility';
-import { uint8ArrayToUTF8, uint8ArrayTo16BitServiceUuids } from '../common/convert';
+import { Utility } from '../common/utility';
+import { Convert } from '../common/convert';
 import { GapAdvertisementFlagType, isGapAdvertisementFlagRaised } from '../gap/gap-advertisement-flag-type';
 import { GapAttributesMetadata, parseGapAttributesMetadata } from '../gap/gap-attributes-metadata';
 import { iOSAdvertisingData, iOSAdvertisingServiceDataDictionary, isIOSAdvertisingData } from '../plugin/ios-advertising-data';
 import { PluginAdvertisement } from '../plugin/plugin-advertisement';
+
+const { isObject, isArrayBuffer, isUint8Array } = Utility;
 
 export interface AdvertisingServiceDataDictionary extends iOSAdvertisingServiceDataDictionary {
 }
@@ -57,8 +59,8 @@ function populateAdvertisementFromGap(
 		: gap.localNameComplete;
 
 	target.gap = gap;
-	target.advDataLocalName = uint8ArrayToUTF8(localNameBuffer!);
-	target.advDataServiceUUIDs = uint8ArrayTo16BitServiceUuids(gap.completeListOfServiceUuids16Bit!);
+	target.advDataLocalName = Convert.uint8ArrayToUTF8(localNameBuffer!);
+	target.advDataServiceUUIDs = Convert.uint8ArrayTo16BitServiceUuids(gap.completeListOfServiceUuids16Bit!);
 
 	if (isUint8Array(gap.flags)) {
 		const flags = target.gapFlags = gap.flags![0];

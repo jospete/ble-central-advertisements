@@ -1,4 +1,6 @@
-import { isUint8Array } from '../common/utility';
+import { Utility } from '../common/utility';
+
+const { isUint8Array } = Utility;
 
 export interface GapManufacturerData {
 	manufacturerId: number;

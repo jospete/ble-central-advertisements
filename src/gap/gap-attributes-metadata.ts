@@ -1,6 +1,8 @@
-import { removeUndefinedEntries } from '../common/utility';
+import { Utility } from '../common/utility';
 import { GapAttributeCode } from './gap-attribute-code';
 import { GapAttributesDictionary, parseGapAttributesDictionary } from './gap-attributes-dictionary';
+
+const { removeUndefinedEntries } = Utility;
 
 export type GapAttributeValue = Uint8Array;
 
