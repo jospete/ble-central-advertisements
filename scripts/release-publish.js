@@ -5,13 +5,13 @@ const { execSync } = require('child_process');
 const { version } = require('../package.json');
 const { smokeTest } = argv;
 
-const git = (cmd) => {
+function git(cmd) {
 	const fullCmd = 'git ' + cmd;
 	console.log('> ' + fullCmd);
 	return smokeTest ? 0 : execSync(fullCmd, { stdio: 'inherit' });
 };
 
-const run = () => {
+function publishVersion() {
 
 	const versionTag = 'v' + version;
 	const releaseBranchName = 'release/' + versionTag;
@@ -36,4 +36,4 @@ const run = () => {
 	git('push origin ' + currentBranchName);
 };
 
-run();
+publishVersion();
