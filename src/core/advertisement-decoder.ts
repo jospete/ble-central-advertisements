@@ -4,6 +4,7 @@ import { GapAdvertisementFlagType, isGapAdvertisementFlagRaised } from '../gap/g
 import { GapAttributesMetadata, parseGapAttributesMetadata } from '../gap/gap-attributes-metadata';
 import { iOSAdvertisingData, iOSAdvertisingServiceDataDictionary, isIOSAdvertisingData } from '../plugin/ios-advertising-data';
 import { PluginAdvertisement } from '../plugin/plugin-advertisement';
+import { parseAdvertisementManufacturerMetadata } from '../gap/gap-manufacturer-data';
 
 const { isObject, isArrayBuffer, isUint8Array } = Utility;
 
@@ -15,7 +16,6 @@ export interface AdvertisingServiceDataDictionary extends iOSAdvertisingServiceD
  * and masks platform-specific fields as generalized ones.
  */
 export interface Advertisement extends PluginAdvertisement {
-
 	/**
 	 * Raw GAP dictionary result - only available when the decoded
 	 * advertisement provides a raw ArrayBuffer instance.
@@ -58,6 +58,11 @@ export interface Advertisement extends PluginAdvertisement {
 	advDataServiceUUIDs?: string[];
 
 	/**
+	 * Any service-specific data the BLE peripheral chooses to provide.
+	 */
+	advDataServiceData?: AdvertisingServiceDataDictionary;
+
+	/**
 	 * Block of data provided by the vendor of the BLE peripheral, which
 	 * includes both a 16-bit UUID of the manufacturer (first 2 bytes) and a custom
 	 * manufacturer-specific payload (remaining N bytes of manufacturer data segment).
@@ -65,22 +70,34 @@ export interface Advertisement extends PluginAdvertisement {
 	advDataManufacturerData?: ArrayBuffer;
 
 	/**
-	 * Any service-specific data the BLE peripheral chooses to provide.
+	 * The manufacturer ID parsed from the BLE peripheral advertisement.
+	 * Will only be provided if the payload contains manufacturer data.
 	 */
-	advDataServiceData?: AdvertisingServiceDataDictionary;
+	advDataManufacturerId?: number;
+
+	/**
+	 * The manufacturer data (modulo the manufacturer ID) parsed from the BLE peripheral advertisement.
+	 * Will only be provided if the payload contains manufacturer data.
+	 */
+	advDataManufacturerPayload?: Uint8Array;
 }
 
 /**
  * Customization options for decoder instances.
  */
 export interface AdvertisementDecoderOptions {
-
 	/**
 	 * When true, will instruct the decoder to assign
 	 * the parsed short name to `advDataLocalName`.
 	 * Otherwise, the complete (long) name will be assigned.
 	 */
 	useShortenedLocalName?: boolean;
+
+	/**
+	 * When true, will instruct the decoder to
+	 * also parse the manufacturer data segment if it is available.
+	 */
+	includeManufacturerMetadata?: boolean;
 
 	/**
 	 * Allow for custom options used by sub-classes.
@@ -92,7 +109,6 @@ function cloneIOSAdvertisingData(
 	target: Partial<Advertisement>,
 	adv: iOSAdvertisingData
 ): void {
-
 	target.advDataChannel = adv.kCBAdvDataChannel;
 	target.advDataLocalName = adv.kCBAdvDataLocalName;
 	target.advDataTxPowerLevel = adv.kCBAdvDataTxPowerLevel;
@@ -107,7 +123,6 @@ function populateAdvertisementFromGap(
 	gap: GapAttributesMetadata,
 	options: AdvertisementDecoderOptions
 ): void {
-
 	const localNameBuffer = options.useShortenedLocalName
 		? gap.localNameShortened
 		: gap.localNameComplete;
@@ -128,7 +143,7 @@ function populateAdvertisementFromGap(
 		target.advDataTxPowerLevel = gap.txPowerLevel![0];
 
 	if (isUint8Array(gap.manufacturerSpecificData))
-		target.advDataManufacturerData = gap.manufacturerSpecificData;
+		target.advDataManufacturerData = gap.manufacturerSpecificData!.buffer;
 }
 
 /**
@@ -140,7 +155,9 @@ function populateAdvertisementFromGap(
 export class AdvertisementDecoder {
 
 	constructor(
-		private readonly options: AdvertisementDecoderOptions = {}
+		private readonly options: AdvertisementDecoderOptions = {
+			includeManufacturerMetadata: true
+		}
 	) {
 	}
 
@@ -158,7 +175,6 @@ export class AdvertisementDecoder {
 		input: PluginAdvertisement | Partial<PluginAdvertisement> | ArrayBuffer,
 		output?: Partial<Advertisement>
 	): Advertisement | Partial<Advertisement> {
-
 		let result = isObject(output)
 			? output as Advertisement
 			: input as Advertisement;
@@ -184,6 +200,13 @@ export class AdvertisementDecoder {
 
 		} else if (isIOSAdvertisingData(advertising)) {
 			cloneIOSAdvertisingData(result, advertising as iOSAdvertisingData);
+		}
+
+		if (this.options.includeManufacturerMetadata && isArrayBuffer(result.advDataManufacturerData)) {
+			const parsedMfrData = parseAdvertisementManufacturerMetadata(new Uint8Array(result.advDataManufacturerData!));
+			const { manufacturerId, manufacturerData } = parsedMfrData;
+			result.advDataManufacturerId = manufacturerId;
+			result.advDataManufacturerPayload = manufacturerData;
 		}
 
 		return result;
