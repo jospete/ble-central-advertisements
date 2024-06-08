@@ -15,14 +15,58 @@ export interface AdvertisingServiceDataDictionary extends iOSAdvertisingServiceD
  * and masks platform-specific fields as generalized ones.
  */
 export interface Advertisement extends PluginAdvertisement {
+
+	/**
+	 * Raw GAP dictionary result - only available when the decoded
+	 * advertisement provides a raw ArrayBuffer instance.
+	 */
 	gap?: GapAttributesMetadata;
+
+	/**
+	 * Value of `GapAttributeCode.FLAGS` - only available when the decoded
+	 * advertisement provides a raw ArrayBuffer instance.
+	 */
 	gapFlags?: number;
+
+	/**
+	 * The channel that this BLE peripheral is advertising on.
+	 * https://www.rfwireless-world.com/Terminology/BLE-Advertising-channels-and-Data-channels-list.html
+	 */
 	advDataChannel?: number;
+
+	/**
+	 * An alternate name for this BLE peripheral.
+	 * This will be the short name or the complete name, depending on decoder options.
+	 */
 	advDataLocalName?: string;
+
+	/**
+	 * Indication of expected signal power for the BLE peripheral.
+	 * https://www.bluetooth.com/specifications/specs/tx-power-service-1-0/
+	 */
 	advDataTxPowerLevel?: number;
+
+	/**
+	 * Whether the BLE peripheral is advertising as connectable.
+	 * When this is false, the peripherl is in "limited discovery" or "discovery only" mode.
+	 */
 	advDataIsConnectable?: boolean;
+
+	/**
+	 * Any 16-bit service UUIDs included in the advertisement payload.
+	 */
 	advDataServiceUUIDs?: string[];
+
+	/**
+	 * Block of data provided by the vendor of the BLE peripheral, which
+	 * includes both a 16-bit UUID of the manufacturer (first 2 bytes) and a custom
+	 * manufacturer-specific payload (remaining N bytes of manufacturer data segment).
+	 */
 	advDataManufacturerData?: ArrayBuffer;
+
+	/**
+	 * Any service-specific data the BLE peripheral chooses to provide.
+	 */
 	advDataServiceData?: AdvertisingServiceDataDictionary;
 }
 
@@ -30,7 +74,17 @@ export interface Advertisement extends PluginAdvertisement {
  * Customization options for decoder instances.
  */
 export interface AdvertisementDecoderOptions {
+
+	/**
+	 * When true, will instruct the decoder to assign
+	 * the parsed short name to `advDataLocalName`.
+	 * Otherwise, the complete (long) name will be assigned.
+	 */
 	useShortenedLocalName?: boolean;
+
+	/**
+	 * Allow for custom options used by sub-classes.
+	 */
 	[key: string]: any;
 }
 

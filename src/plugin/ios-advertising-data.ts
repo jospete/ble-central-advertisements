@@ -13,12 +13,43 @@ export interface iOSAdvertisingServiceDataDictionary {
  * Core object attributes iOS 'advertising' property.
  */
 export interface iOSAdvertisingData {
+
+	/**
+	 * Corresponds to `GapAttributeCode.CHANNEL_MAP_UPDATE_INDICATION`
+	 */
 	kCBAdvDataChannel?: number;
+
+	/**
+	 * Corresponds to `GapAttributeCode.LOCAL_NAME_SHORTENED`
+	 */
 	kCBAdvDataLocalName?: string;
+
+	/**
+	 * Corresponds to `GapAttributeCode.TX_POWER_LEVEL`
+	 */
 	kCBAdvDataTxPowerLevel?: number;
+
+	/**
+	 * Corresponds to `GapAttributeCode.FLAGS`
+	 */
 	kCBAdvDataIsConnectable?: boolean;
+
+	/**
+	 * Corresponds to `GapAttributeCode.COMPLETE_LIST_OF_SERVICE_UUIDS_16_BIT`
+	 */
 	kCBAdvDataServiceUUIDs?: string[];
+
+	/**
+	 * Corresponds to `GapAttributeCode.MANUFACTURER_SPECIFIC_DATA`
+	 */
 	kCBAdvDataManufacturerData?: ArrayBuffer;
+
+	/**
+	 * Corresponds to one of:
+	 * - `GapAttributeCode.SERVICE_DATA_UUID_16_BIT`
+	 * - `GapAttributeCode.SERVICE_DATA_UUID_32_BIT`
+	 * - `GapAttributeCode.SERVICE_DATA_UUID_128_BIT`
+	 */
 	kCBAdvDataServiceData?: iOSAdvertisingServiceDataDictionary;
 }
 
