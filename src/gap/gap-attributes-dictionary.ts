@@ -19,7 +19,6 @@ export interface GapAttributesDictionary {
  * https://stackoverflow.com/questions/24003777/read-advertisement-packet-in-android
  */
 export function parseGapAttributesDictionary(buffer: Uint8Array): GapAttributesDictionary {
-
 	const result: GapAttributesDictionary = {};
 
 	if (!isUint8Array(buffer)) {

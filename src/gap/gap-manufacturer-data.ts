@@ -13,7 +13,6 @@ export interface GapManufacturerData {
 export function parseAdvertisementManufacturerMetadata(
 	input: Uint8Array
 ): GapManufacturerData {
-
 	let manufacturerId: number = 0;
 	let manufacturerData: Uint8Array = input;
 
@@ -22,5 +21,5 @@ export function parseAdvertisementManufacturerMetadata(
 		manufacturerData = input.slice(2);
 	}
 
-	return {manufacturerId, manufacturerData};
+	return { manufacturerId, manufacturerData };
 }

@@ -10,7 +10,6 @@ export type PluginAdvertisingData = ArrayBuffer | ArrayBufferLike | iOSAdvertisi
  * Advertisement packet received from one of the scan callbacks of cordova-plugin-ble-central.
  */
 export interface PluginAdvertisement {
-
 	/**
 	 * Unique identifier of the BLE peripheral which produced this advertisement
 	 */

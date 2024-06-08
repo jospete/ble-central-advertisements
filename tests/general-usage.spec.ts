@@ -1,11 +1,8 @@
 import { AdvertisementDecoder, Convert } from '../src';
 
 describe('ble-central-advertisements', () => {
-
 	describe('AdvertisementDecoder', () => {
-
 		it('decodes advertisements based on a combination of the bluetooth spec and the ble central plugin spec', () => {
-
 			/*
 			https://community.silabs.com/s/article/kba-bt-0201-bluetooth-advertising-data-basics?language=en_US
 
@@ -38,7 +35,6 @@ describe('ble-central-advertisements', () => {
 		});
 
 		it('can run the readme example', () => {
-
 			const decoder = new AdvertisementDecoder();
 			const advertisementDataHex = '020106030309181409546865726d6f6d65746572204578616d706c65';
 			const input = Convert.hexToUint8Array(advertisementDataHex).buffer;

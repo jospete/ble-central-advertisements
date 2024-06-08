@@ -13,7 +13,6 @@ export interface iOSAdvertisingServiceDataDictionary {
  * Core object attributes iOS 'advertising' property.
  */
 export interface iOSAdvertisingData {
-
 	/**
 	 * Corresponds to `GapAttributeCode.CHANNEL_MAP_UPDATE_INDICATION`
 	 */
@@ -74,7 +73,6 @@ function getIOSAdvertisingDataKeys(): iOSAdvertisingDataKey[] {
  * Utility for testing the validity of a given value as an iOS advertisement dictionary.
  */
 export function isIOSAdvertisingData(value: any): boolean {
-
 	if (!isObject(value)) {
 		return false;
 	}

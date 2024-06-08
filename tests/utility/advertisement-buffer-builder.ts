@@ -1,5 +1,4 @@
 export class AdvertisementBufferBuilder {
-
 	public bytes: number[] = [];
 
 	add(tag: number, buffer: Uint8Array): this {
