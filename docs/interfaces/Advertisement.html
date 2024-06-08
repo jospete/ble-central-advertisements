@@ -26,7 +26,7 @@ and masks platform-specific fields as generalized ones.</p>
 <ul class="tsd-hierarchy">
 <li><span class="target">Advertisement</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/d6b6769/src/core/advertisement-decoder.ts#L17">core/advertisement-decoder.ts:17</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/core/advertisement-decoder.ts#L18">core/advertisement-decoder.ts:18</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -38,6 +38,8 @@ and masks platform-specific fields as generalized ones.</p>
 <a href="Advertisement.html#advDataIsConnectable" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>Is<wbr/>Connectable?</span></a>
 <a href="Advertisement.html#advDataLocalName" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>Local<wbr/>Name?</span></a>
 <a href="Advertisement.html#advDataManufacturerData" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>Manufacturer<wbr/>Data?</span></a>
+<a href="Advertisement.html#advDataManufacturerId" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>Manufacturer<wbr/>Id?</span></a>
+<a href="Advertisement.html#advDataManufacturerPayload" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>Manufacturer<wbr/>Payload?</span></a>
 <a href="Advertisement.html#advDataServiceData" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>Service<wbr/>Data?</span></a>
 <a href="Advertisement.html#advDataServiceUUIDs" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>ServiceUUIDs?</span></a>
 <a href="Advertisement.html#advDataTxPowerLevel" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>Tx<wbr/>Power<wbr/>Level?</span></a>
@@ -52,73 +54,127 @@ and masks platform-specific fields as generalized ones.</p>
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member"><a id="advDataChannel" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>adv<wbr/>Data<wbr/>Channel</span><a href="#advDataChannel" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" id="icon-anchor-a"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" id="icon-anchor-b"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" id="icon-anchor-c"></path></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>Channel</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>Channel</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>The channel that this BLE peripheral is advertising on.
+<a href="https://www.rfwireless-world.com/Terminology/BLE-Advertising-channels-and-Data-channels-list.html">https://www.rfwireless-world.com/Terminology/BLE-Advertising-channels-and-Data-channels-list.html</a></p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/d6b6769/src/core/advertisement-decoder.ts#L20">core/advertisement-decoder.ts:20</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/core/advertisement-decoder.ts#L35">core/advertisement-decoder.ts:35</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="advDataIsConnectable" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>adv<wbr/>Data<wbr/>Is<wbr/>Connectable</span><a href="#advDataIsConnectable" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>Is<wbr/>Connectable</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>Is<wbr/>Connectable</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography"><p>Whether the BLE peripheral is advertising as connectable.
+When this is false, the peripherl is in &quot;limited discovery&quot; or &quot;discovery only&quot; mode.</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/d6b6769/src/core/advertisement-decoder.ts#L23">core/advertisement-decoder.ts:23</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/core/advertisement-decoder.ts#L53">core/advertisement-decoder.ts:53</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="advDataLocalName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>adv<wbr/>Data<wbr/>Local<wbr/>Name</span><a href="#advDataLocalName" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>Local<wbr/>Name</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>Local<wbr/>Name</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>An alternate name for this BLE peripheral.
+This will be the short name or the complete name, depending on decoder options.</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/d6b6769/src/core/advertisement-decoder.ts#L21">core/advertisement-decoder.ts:21</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/core/advertisement-decoder.ts#L41">core/advertisement-decoder.ts:41</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="advDataManufacturerData" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>adv<wbr/>Data<wbr/>Manufacturer<wbr/>Data</span><a href="#advDataManufacturerData" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>Manufacturer<wbr/>Data</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type ">ArrayBuffer</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>Manufacturer<wbr/>Data</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type ">ArrayBuffer</span></div>
+<div class="tsd-comment tsd-typography"><p>Block of data provided by the vendor of the BLE peripheral, which
+includes both a 16-bit UUID of the manufacturer (first 2 bytes) and a custom
+manufacturer-specific payload (remaining N bytes of manufacturer data segment).</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/d6b6769/src/core/advertisement-decoder.ts#L25">core/advertisement-decoder.ts:25</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/core/advertisement-decoder.ts#L70">core/advertisement-decoder.ts:70</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member"><a id="advDataManufacturerId" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>adv<wbr/>Data<wbr/>Manufacturer<wbr/>Id</span><a href="#advDataManufacturerId" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>Manufacturer<wbr/>Id</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>The manufacturer ID parsed from the BLE peripheral advertisement.
+Will only be provided if the payload contains manufacturer data.</p>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/core/advertisement-decoder.ts#L76">core/advertisement-decoder.ts:76</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member"><a id="advDataManufacturerPayload" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>adv<wbr/>Data<wbr/>Manufacturer<wbr/>Payload</span><a href="#advDataManufacturerPayload" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>Manufacturer<wbr/>Payload</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type ">Uint8Array</span></div>
+<div class="tsd-comment tsd-typography"><p>The manufacturer data (modulo the manufacturer ID) parsed from the BLE peripheral advertisement.
+Will only be provided if the payload contains manufacturer data.</p>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/core/advertisement-decoder.ts#L82">core/advertisement-decoder.ts:82</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="advDataServiceData" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>adv<wbr/>Data<wbr/>Service<wbr/>Data</span><a href="#advDataServiceData" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>Service<wbr/>Data</span><span class="tsd-signature-symbol">?:</span> <a href="AdvertisingServiceDataDictionary.html" class="tsd-signature-type tsd-kind-interface">AdvertisingServiceDataDictionary</a></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>Service<wbr/>Data</span><span class="tsd-signature-symbol">?:</span> <a href="AdvertisingServiceDataDictionary.html" class="tsd-signature-type tsd-kind-interface">AdvertisingServiceDataDictionary</a></div>
+<div class="tsd-comment tsd-typography"><p>Any service-specific data the BLE peripheral chooses to provide.</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/d6b6769/src/core/advertisement-decoder.ts#L26">core/advertisement-decoder.ts:26</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/core/advertisement-decoder.ts#L63">core/advertisement-decoder.ts:63</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="advDataServiceUUIDs" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>adv<wbr/>Data<wbr/>ServiceUUIDs</span><a href="#advDataServiceUUIDs" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>ServiceUUIDs</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>ServiceUUIDs</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><p>Any 16-bit service UUIDs included in the advertisement payload.</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/d6b6769/src/core/advertisement-decoder.ts#L24">core/advertisement-decoder.ts:24</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/core/advertisement-decoder.ts#L58">core/advertisement-decoder.ts:58</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="advDataTxPowerLevel" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>adv<wbr/>Data<wbr/>Tx<wbr/>Power<wbr/>Level</span><a href="#advDataTxPowerLevel" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>Tx<wbr/>Power<wbr/>Level</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">adv<wbr/>Data<wbr/>Tx<wbr/>Power<wbr/>Level</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>Indication of expected signal power for the BLE peripheral.
+<a href="https://www.bluetooth.com/specifications/specs/tx-power-service-1-0/">https://www.bluetooth.com/specifications/specs/tx-power-service-1-0/</a></p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/d6b6769/src/core/advertisement-decoder.ts#L22">core/advertisement-decoder.ts:22</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/core/advertisement-decoder.ts#L47">core/advertisement-decoder.ts:47</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="advertising" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>advertising</span><a href="#advertising" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">advertising</span><span class="tsd-signature-symbol">:</span> <a href="../types/PluginAdvertisingData.html" class="tsd-signature-type tsd-kind-type-alias">PluginAdvertisingData</a></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">advertising</span><span class="tsd-signature-symbol">:</span> <a href="../types/PluginAdvertisingData.html" class="tsd-signature-type tsd-kind-type-alias">PluginAdvertisingData</a></div>
+<div class="tsd-comment tsd-typography"><p>Advertising payload reported by the cordova plugin.
+On Android, this will be the full advertisement as a raw ArrayBuffer.
+On iOS, this will be a preprocessed dictionary GAP attributes.</p>
+</div><aside class="tsd-sources">
 <p>Inherited from <a href="PluginAdvertisement.html">PluginAdvertisement</a>.<a href="PluginAdvertisement.html#advertising">advertising</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/d6b6769/src/plugin/plugin-advertisement.ts#L16">plugin/plugin-advertisement.ts:16</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/plugin/plugin-advertisement.ts#L35">plugin/plugin-advertisement.ts:35</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="gap" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>gap</span><a href="#gap" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">gap</span><span class="tsd-signature-symbol">?:</span> <a href="GapAttributesMetadata.html" class="tsd-signature-type tsd-kind-interface">GapAttributesMetadata</a></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">gap</span><span class="tsd-signature-symbol">?:</span> <a href="GapAttributesMetadata.html" class="tsd-signature-type tsd-kind-interface">GapAttributesMetadata</a></div>
+<div class="tsd-comment tsd-typography"><p>Raw GAP dictionary result - only available when the decoded
+advertisement provides a raw ArrayBuffer instance.</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/d6b6769/src/core/advertisement-decoder.ts#L18">core/advertisement-decoder.ts:18</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/core/advertisement-decoder.ts#L23">core/advertisement-decoder.ts:23</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="gapFlags" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>gap<wbr/>Flags</span><a href="#gapFlags" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">gap<wbr/>Flags</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">gap<wbr/>Flags</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>Value of <code>GapAttributeCode.FLAGS</code> - only available when the decoded
+advertisement provides a raw ArrayBuffer instance.</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/d6b6769/src/core/advertisement-decoder.ts#L19">core/advertisement-decoder.ts:19</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/core/advertisement-decoder.ts#L29">core/advertisement-decoder.ts:29</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="id" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>id</span><a href="#id" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>Unique identifier of the BLE peripheral which produced this advertisement</p>
+</div><aside class="tsd-sources">
 <p>Inherited from <a href="PluginAdvertisement.html">PluginAdvertisement</a>.<a href="PluginAdvertisement.html#id">id</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/d6b6769/src/plugin/plugin-advertisement.ts#L13">plugin/plugin-advertisement.ts:13</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/plugin/plugin-advertisement.ts#L16">plugin/plugin-advertisement.ts:16</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="name" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>name</span><a href="#name" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>Human-readable name of the BLE peripheral, which corresponds to
+<code>GapAttributeCode.LOCAL_NAME_COMPLETE</code></p>
+</div><aside class="tsd-sources">
 <p>Inherited from <a href="PluginAdvertisement.html">PluginAdvertisement</a>.<a href="PluginAdvertisement.html#name">name</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/d6b6769/src/plugin/plugin-advertisement.ts#L14">plugin/plugin-advertisement.ts:14</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/plugin/plugin-advertisement.ts#L22">plugin/plugin-advertisement.ts:22</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="rssi" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>rssi</span><a href="#rssi" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">rssi</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">rssi</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>The detected signal quality between our central and the BLE peripheral
+<a href="https://www.bluetooth.com/blog/proximity-and-rssi/">https://www.bluetooth.com/blog/proximity-and-rssi/</a></p>
+</div><aside class="tsd-sources">
 <p>Inherited from <a href="PluginAdvertisement.html">PluginAdvertisement</a>.<a href="PluginAdvertisement.html#rssi">rssi</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/d6b6769/src/plugin/plugin-advertisement.ts#L15">plugin/plugin-advertisement.ts:15</a></li></ul></aside></section></section></div>
+<li>Defined in <a href="https://github.com/jospete/ble-central-advertisements/blob/f026657/src/plugin/plugin-advertisement.ts#L28">plugin/plugin-advertisement.ts:28</a></li></ul></aside></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -141,6 +197,8 @@ and masks platform-specific fields as generalized ones.</p>
 <li><a href="#advDataIsConnectable" class=""><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>Is<wbr/>Connectable</span></a></li>
 <li><a href="#advDataLocalName" class=""><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>Local<wbr/>Name</span></a></li>
 <li><a href="#advDataManufacturerData" class=""><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>Manufacturer<wbr/>Data</span></a></li>
+<li><a href="#advDataManufacturerId" class=""><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>Manufacturer<wbr/>Id</span></a></li>
+<li><a href="#advDataManufacturerPayload" class=""><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>Manufacturer<wbr/>Payload</span></a></li>
 <li><a href="#advDataServiceData" class=""><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>Service<wbr/>Data</span></a></li>
 <li><a href="#advDataServiceUUIDs" class=""><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>ServiceUUIDs</span></a></li>
 <li><a href="#advDataTxPowerLevel" class=""><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>adv<wbr/>Data<wbr/>Tx<wbr/>Power<wbr/>Level</span></a></li>
