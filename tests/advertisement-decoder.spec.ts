@@ -34,7 +34,7 @@ describe('AdvertisementDecoder', () => {
 			id: "15B4F1C5-C9C0-4441-BD9F-1A7ED8F7A365",
 			advertising: {
 				kCBAdvDataLocalName: "demo",
-				kCBAdvDataManufacturerData: Uint8Array.of(0x00).buffer,
+				kCBAdvDataManufacturerData: Uint8Array.of(0x00, 0xFF, 0x01, 0x02, 0x03).buffer,
 				kCBAdvDataServiceUUIDs: [
 					"721b"
 				],
@@ -54,14 +54,16 @@ describe('AdvertisementDecoder', () => {
 			advDataIsConnectable: iosAdvertisingData.advertising.kCBAdvDataIsConnectable,
 			advDataServiceData: iosAdvertisingData.advertising.kCBAdvDataServiceData,
 			advDataManufacturerData: iosAdvertisingData.advertising.kCBAdvDataManufacturerData,
-			advDataServiceUUIDs: iosAdvertisingData.advertising.kCBAdvDataServiceUUIDs
+			advDataServiceUUIDs: iosAdvertisingData.advertising.kCBAdvDataServiceUUIDs,
+			advDataManufacturerId: 0xFF00,
+			advDataManufacturerPayload: Uint8Array.of(0x01, 0x02, 0x03)
 		};
 
 		expect(decoded).toEqual(expectedOutput);
 	});
 
 	it('properly handles complex configurations', () => {
-		
+
 		const decoder = new AdvertisementDecoder();
 
 		const partialAdvertisingData: PluginAdvertisement = {
@@ -78,7 +80,7 @@ describe('AdvertisementDecoder', () => {
 
 	it('has an option to resolve either local shorted name or local complete name when both exist', () => {
 
-		const decoder = new AdvertisementDecoder({useShortenedLocalName: true});
+		const decoder = new AdvertisementDecoder({ useShortenedLocalName: true });
 		const textEncoder = new TextEncoder();
 		const shortNameText = 'Short Name';
 		const completeNameText = 'Complete Name';
@@ -98,12 +100,12 @@ describe('AdvertisementDecoder', () => {
 		const decoder = new AdvertisementDecoder();
 		const channel = 15;
 		const txPowerLevel = 45;
-		const manufacturerDataBuffer = Uint8Array.of(1, 2, 3, 4, 5);
+		const manufacturerDataUint8 = Uint8Array.of(1, 2, 3, 4, 5);
 
 		const advertising = new AdvertisementBufferBuilder()
 			.add(GapAttributeCode.CHANNEL_MAP_UPDATE_INDICATION, Uint8Array.of(channel))
 			.add(GapAttributeCode.TX_POWER_LEVEL, Uint8Array.of(txPowerLevel))
-			.add(GapAttributeCode.MANUFACTURER_SPECIFIC_DATA, manufacturerDataBuffer)
+			.add(GapAttributeCode.MANUFACTURER_SPECIFIC_DATA, manufacturerDataUint8)
 			.toUint8Array()
 			.buffer;
 
@@ -111,6 +113,24 @@ describe('AdvertisementDecoder', () => {
 
 		expect(decoded.advDataChannel).toBe(channel);
 		expect(decoded.advDataTxPowerLevel).toBe(txPowerLevel);
-		expect(decoded.advDataManufacturerData).toEqual(manufacturerDataBuffer);
+		expect(decoded.advDataManufacturerData).toEqual(manufacturerDataUint8.buffer);
+		expect(decoded.advDataManufacturerId).toEqual(0x0201);
+		expect(decoded.advDataManufacturerPayload).toEqual(manufacturerDataUint8.slice(2));
+	});
+
+	it('should NOT include manufacturer metadata when includeManufacturerMetadata is false', () => {
+		const decoder = new AdvertisementDecoder({ includeManufacturerMetadata: false });
+		const manufacturerDataUint8 = Uint8Array.of(1, 2, 3, 4, 5);
+
+		const advertising = new AdvertisementBufferBuilder()
+			.add(GapAttributeCode.MANUFACTURER_SPECIFIC_DATA, manufacturerDataUint8)
+			.toUint8Array()
+			.buffer;
+
+		const decoded = decoder.decode(advertising);
+
+		expect(decoded.advDataManufacturerData).toEqual(manufacturerDataUint8.buffer);
+		expect(decoded.advDataManufacturerId).not.toBeDefined();
+		expect(decoded.advDataManufacturerPayload).not.toBeDefined();
 	});
 });
